@@ -1,5 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import Home from '.Telas/Home/index';
+import Admin from '.Telas/Admin/index';
+import Carrinho from '.Telas/Admin/index';
+import Cadastro_Produtos from '.Telas/Cadastro_Produtos/index';
 
 export default function App() {
   return (
