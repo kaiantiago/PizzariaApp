@@ -1,5 +1,5 @@
 import * as SQLite from 'expo-sqlite';
-import {getDbConnection, lista} from 'dbservice.js';
+import {getDbConnection, exclui, lista} from 'dbservice.js';
 
 
 export class Produto {
@@ -36,7 +36,7 @@ export class Produto {
             let obj = {
                 id: registros.rows.item(n).id,
                 descricao: registros.rows.item(n).descricao,
-                preco: registros.rows.item(n).preco,
+                precoUn: registros.rows.item(n).precoUn,
                 idCat: registros.rows.item(n).idCat
             }
             retorno.push(obj);
@@ -45,11 +45,25 @@ export class Produto {
     }
 
     static listaProdutos(){
-        lista('select * from tbProdutos', geraObjSelect)
+        return lista('select * from tbProdutos', geraObjSelect)
     }
 
     static listaProdutosFiltro(idCat){
-        lista('select * from tbProdutos where idCat = ' + idCat, geraObjSelect)
+        return lista('select * from tbProdutos where idCat = ' + idCat, geraObjSelect)
     }
+
+    static adicionaProduto(pedido){
+        return adiciona('insert into tbProdutos (id, descricao, precoUn, idCat) values (?,?,?)', [pedido.id, pedido.descricao, pedido.precoUn, pedido.idCat] );
+    }
+
+    static alteraProduto(pedido){
+        return adiciona('update tbProdutos set descricao=?, precoUn=?, idCat=? where id=?', [pedido.descricao, pedido.precoUn, pedido.idCat, pedido.id] );
+    }
+
+    static excluiProduto(idProd){
+        return exclui('delete from tbProdutos where id=?', idProd);
+    }
+
+    //valida dep todo
 
 }

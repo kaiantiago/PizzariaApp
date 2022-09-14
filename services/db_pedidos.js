@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite';
-import getDbConnection from 'dbservice.js';
-
+import {getDbConnection, exclui, lista} from 'dbservice.js';
+import { ProdPedido } from './db_prods_pedidos';
 
 export class Pedido {
 
@@ -44,7 +44,18 @@ export class Pedido {
     }
 
     static listaPedidos(){
-        lista('select * from tbPedidos', geraObjSelect)
+        return lista('select * from tbPedidos', geraObjSelect)
     }
+
+    static adicionaPedido(pedido, produtos){
+        var promises;
+        promises.push(adiciona('insert into tbPedidos (idC, total, cep) values (?,?,?)', [pedido.id, pedido.total, pedido.cep] ));
+        
+        produtos.forEach(element => {
+            promises.push(ProdPedido.adicionaProdutoDoPedido(element))
+        });
+        return Promise.all(promises);
+    }
+
 
 }

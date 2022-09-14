@@ -1,5 +1,5 @@
 import * as SQLite from 'expo-sqlite';
-import getDbConnection from 'dbservice.js';
+import {getDbConnection, exclui, lista} from 'dbservice.js';
 
 export class Categoria {
 
@@ -7,7 +7,7 @@ export class Categoria {
         return new Promise((resolve, reject) => {
             const query = `CREATE TABLE IF NOT EXISTS tbCategorias
             (
-                id int not null primary key,
+                idC int not null primary key,
                 descricao text not null    
             )`;
     
@@ -31,7 +31,7 @@ export class Categoria {
 
         for (let n = 0; n < registros.rows.length; n++) {
             let obj = {
-                id: registros.rows.item(n).id,
+                idC: registros.rows.item(n).idC,
                 descricao: registros.rows.item(n).descricao
             }
             retorno.push(obj);
@@ -40,8 +40,25 @@ export class Categoria {
     }
 
     static listaCategorias(){
-        lista('select * from tbCategorias', geraObjSelect)
+        return lista('select * from tbCategorias', geraObjSelect)
     }
+    
+    static adicionaCategoria(categoria){
+        return adiciona('insert into tbCategorias (idC, descricao) values (?,?)', [categoria.idC, categoria.descricao] );
+    }
+
+    static alteraCategoria(categoria){
+        return adiciona('update tbCategorias set descricao=? where idC=?', [categoria.descricao, categoria.idC] );
+    }
+
+    static excluiCategoria(idCat){
+        return exclui('delete from tbCategorias where idC=?', idCat);
+        //exclui('delete from tbProdutos where idCat=?', idCat);
+    }
+
+    /*static validaDependencia(){
+        return lista('select * from tbCategorias', geraObjSelect).length!=0;
+    }*/
 
 }
 
