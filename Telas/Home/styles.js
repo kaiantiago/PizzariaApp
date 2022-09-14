@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     areaLogo: {
         width:200,
         height: 200,
-        marginLeft: 28
+        marginLeft: 30
     },
     areaMenu: {
         justifyContent: 'space-around',
