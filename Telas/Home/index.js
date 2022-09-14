@@ -10,24 +10,28 @@ export default function Home({ navigation }) {
                 <View style={styles.areaLogo}>
                     <Image style={styles.areaLogo} source={require('../../Img/imagem_pizza.png')}></Image>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => {
-                    alert('Fazer Pedido')
-                }}>
+
+                <TouchableOpacity style={styles.button} onPress={
+                    () => navigation.navigate('Compra_Carrinho')
+                }>
                     <Text style={styles.textButton}>Fazer um pedido</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => {
-                    alert('Cadastro de Produto')
-                }}>
+
+                <TouchableOpacity style={styles.button} onPress={
+                    () => navigation.navigate('Cadastro_Produtos')
+                }>
                     <Text style={styles.textButton}>Cadastro de Produtos</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => {
-                    alert('Cadastro de Categoria')
-                }}>
+
+                <TouchableOpacity style={styles.button} onPress={
+                    () => navigation.navigate('Cadastro_Categorias')
+                }>
                     <Text style={styles.textButton}>Cadastro de Categorias</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => {
-                    alert('Lista de Pedidos')
-                }}>
+                
+                <TouchableOpacity style={styles.button} onPress={
+                    () => navigation.navigate('Cadastro_Pedidos')
+                }>
                     <Text style={styles.textButton}>Lista de Pedidos</Text>
                 </TouchableOpacity>
             </View>
