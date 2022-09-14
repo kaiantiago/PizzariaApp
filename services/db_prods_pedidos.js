@@ -1,5 +1,5 @@
 import * as SQLite from 'expo-sqlite';
-import getDbConnection from 'dbservice.js';
+import {getDbConnection, exclui, lista} from 'dbservice.js';
 
 
 export class ProdPedido {
@@ -61,7 +61,10 @@ export class ProdPedido {
 
 
     static listaProdutosDoPedido(idPed){
-        lista('select * from tbProdutos as p inner join tbProdsPedidos as pp on p.id = pp.idProd where pp.idPed = ' + idPed, geraObjSelectPedido)
+        return lista('select * from tbProdutos as p inner join tbProdsPedidos as pp on p.id = pp.idProd where pp.idPed = ' + idPed, geraObjSelectPedido)
     }
 
+    static adicionaProdutoDoPedido(pedido){
+        return adiciona('insert into tbProdsPedidos (idProd, idPed, qtd) values (?,?,?)', [pedido.idProd, pedido.idPed, pedido.qtd] );
+    }
 }
