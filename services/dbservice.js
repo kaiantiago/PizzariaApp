@@ -1,5 +1,8 @@
 import * as SQLite from 'expo-sqlite';
-
+import { Categoria }from './db_categorias';
+import { ProdPedido } from './db_prods_pedidos';
+import { Pedido } from './db_pedidos';
+import { Produto } from './db_produtos';
 
 export function getDbConnection() {
     const cx = SQLite.openDatabase('dbPizzaria.db');
@@ -8,25 +11,18 @@ export function getDbConnection() {
 
 export async function createTables() {
     //all methods in all
-    return Promise.all();
-};
+    return Promise.all([
+        Categoria.createTable(), 
+        ProdPedido.createTable(), 
+        Pedido.createTable(), 
+        Produto.createTable()]);
+}
 
-
-
-
-export function obtemTodosChamados() {
+export function fazSelect() {
     return lista ('select * from tbChamados')
 }
 
-export function obtemChamadosAtendidos() {
-    return lista ('select * from tbChamados where situacao="A"')
-}
-
-export function obtemChamadosPendentes() {
-    return lista ('select * from tbChamados where situacao="P"')
-}
-
-export function lista(queryQ) {
+export function lista(queryQ, geraObjSelect) {
     return new Promise((resolve, reject) => {
 
         let dbCx = getDbConnection();
@@ -35,18 +31,7 @@ export function lista(queryQ) {
             tx.executeSql(query, [],
                 (tx, registros) => {
 
-                    var retorno = []
-
-                    for (let n = 0; n < registros.rows.length; n++) {
-                        let obj = {
-                            id: registros.rows.item(n).id,
-                            nome: registros.rows.item(n).nome,
-                            data: registros.rows.item(n).data,
-                            descricao: registros.rows.item(n).descricao,
-                            situacao: registros.rows.item(n).situacao
-                        }
-                        retorno.push(obj);
-                    }
+                    var retorno = geraObjSelect(registros);
                     resolve(retorno);
                 })
         },
