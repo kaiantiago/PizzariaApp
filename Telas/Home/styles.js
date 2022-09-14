@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     },
     titulo: {
         fontSize: 30,
+        fontWeight: 'bold',
         marginBottom: 20
     },
     areaLogo: {

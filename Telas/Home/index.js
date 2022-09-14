@@ -12,7 +12,7 @@ export default function Home({ navigation }) {
                 </View>
 
                 <TouchableOpacity style={styles.button} onPress={
-                    () => navigation.navigate('Compra_Carrinho')
+                    () => navigation.navigate('Comprar')
                 }>
                     <Text style={styles.textButton}>Fazer um pedido</Text>
                 </TouchableOpacity>
@@ -20,19 +20,19 @@ export default function Home({ navigation }) {
                 <TouchableOpacity style={styles.button} onPress={
                     () => navigation.navigate('Cadastro_Produtos')
                 }>
-                    <Text style={styles.textButton}>Cadastro de Produtos</Text>
+                    <Text style={styles.textButton}>Cadastro de produtos</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.button} onPress={
                     () => navigation.navigate('Cadastro_Categorias')
                 }>
-                    <Text style={styles.textButton}>Cadastro de Categorias</Text>
+                    <Text style={styles.textButton}>Cadastro de categorias</Text>
                 </TouchableOpacity>
-                
+
                 <TouchableOpacity style={styles.button} onPress={
-                    () => navigation.navigate('Cadastro_Pedidos')
+                    () => navigation.navigate('Admin')
                 }>
-                    <Text style={styles.textButton}>Lista de Pedidos</Text>
+                    <Text style={styles.textButton}>Lista de pedidos</Text>
                 </TouchableOpacity>
             </View>
         </View>
