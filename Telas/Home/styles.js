@@ -2,14 +2,38 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        marginTop: 50,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#ffffff'
     },
     titulo: {
         fontSize: 30,
-        marginBottom: 50
+        marginBottom: 20
+    },
+    areaLogo: {
+        width:200,
+        height: 200,
+        marginLeft: 28
+    },
+    areaMenu: {
+        justifyContent: 'space-around',
+        marginTop: 10,
+        width: '80%'
+    },
+    button: {
+        width: '100%',
+        height: 60,
+        borderRadius: 22,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#01f601',
+        marginTop: 20,
+    },
+    textButton: {
+        fontSize: 18,
+        color: '#ffffff',
+        fontWeight: 'bold'
     }
 })
 
