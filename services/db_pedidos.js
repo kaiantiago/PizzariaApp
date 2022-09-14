@@ -1,5 +1,5 @@
 import * as SQLite from 'expo-sqlite';
-import {getDbConnection, exclui, lista} from 'dbservice.js';
+import {getDbConnection, exclui, lista, createUniqueId} from 'dbservice.js';
 import { ProdPedido } from './db_prods_pedidos';
 
 export class Pedido {
@@ -8,7 +8,7 @@ export class Pedido {
     return new Promise((resolve, reject) => {
         const query = `CREATE TABLE IF NOT EXISTS tbPedidos
         (
-            id int not null primary key,
+            id text not null primary key,
             total int not null,
             cep text not null
         )`;
@@ -49,7 +49,7 @@ export class Pedido {
 
     static adicionaPedido(pedido, produtos){
         var promises;
-        promises.push(adiciona('insert into tbPedidos (idC, total, cep) values (?,?,?)', [pedido.id, pedido.total, pedido.cep] ));
+        promises.push(adiciona('insert into tbPedidos (id, total, cep) values (?,?,?)', [createUniqueId(), pedido.total, pedido.cep] ));
         
         produtos.forEach(element => {
             promises.push(ProdPedido.adicionaProdutoDoPedido(element))

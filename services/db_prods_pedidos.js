@@ -1,5 +1,5 @@
 import * as SQLite from 'expo-sqlite';
-import {getDbConnection, exclui, lista} from 'dbservice.js';
+import {getDbConnection, exclui, lista, createUniqueId} from 'dbservice.js';
 
 
 export class ProdPedido {
@@ -8,8 +8,8 @@ export class ProdPedido {
     return new Promise((resolve, reject) => {
         const query = `CREATE TABLE IF NOT EXISTS tbProdsPedidos
         (
-            idProd int not null,
-            idPed int not null,
+            idProd text not null,
+            idPed text not null,
             qtd int not null        
         )`;
 

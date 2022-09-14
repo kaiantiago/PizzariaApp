@@ -1,5 +1,5 @@
 import * as SQLite from 'expo-sqlite';
-import {getDbConnection, exclui, lista} from 'dbservice.js';
+import {getDbConnection, exclui, lista, createUniqueId} from 'dbservice.js';
 
 export class Categoria {
 
@@ -7,7 +7,7 @@ export class Categoria {
         return new Promise((resolve, reject) => {
             const query = `CREATE TABLE IF NOT EXISTS tbCategorias
             (
-                idC int not null primary key,
+                idC text not null primary key,
                 descricao text not null    
             )`;
     
@@ -44,7 +44,7 @@ export class Categoria {
     }
     
     static adicionaCategoria(categoria){
-        return adiciona('insert into tbCategorias (idC, descricao) values (?,?)', [categoria.idC, categoria.descricao] );
+        return adiciona('insert into tbCategorias (idC, descricao) values (?,?)', [createUniqueId(), categoria.descricao] );
     }
 
     static alteraCategoria(categoria){

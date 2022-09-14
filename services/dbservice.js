@@ -85,6 +85,11 @@ export function altera(query, elementos) {
     );
 }
 
+
+export function createUniqueId() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(0, 2);
+}
+
 export function exclui(query, id) {
     console.log('Apagando elemento da query' + query +" ;id:"+ id);
     return new Promise((resolve, reject) => {

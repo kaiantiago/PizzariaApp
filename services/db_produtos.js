@@ -1,5 +1,5 @@
 import * as SQLite from 'expo-sqlite';
-import {getDbConnection, exclui, lista} from 'dbservice.js';
+import {getDbConnection, exclui, lista, createUniqueId} from 'dbservice.js';
 
 
 export class Produto {
@@ -8,10 +8,10 @@ export class Produto {
     return new Promise((resolve, reject) => {
         const query = `CREATE TABLE IF NOT EXISTS tbProdutos
         (
-            id int not null primary key,
+            id text not null primary key,
             descricao text not null,
-            preco text not null,
-            idCat int not null     
+            preco int not null,
+            idCat text not null     
         )`;
 
         let dbCx = getDbConnection();
@@ -53,7 +53,7 @@ export class Produto {
     }
 
     static adicionaProduto(pedido){
-        return adiciona('insert into tbProdutos (id, descricao, precoUn, idCat) values (?,?,?)', [pedido.id, pedido.descricao, pedido.precoUn, pedido.idCat] );
+        return adiciona('insert into tbProdutos (id, descricao, precoUn, idCat) values (?,?,?)', [createUniqueId(), pedido.descricao, pedido.precoUn, pedido.idCat] );
     }
 
     static alteraProduto(pedido){
