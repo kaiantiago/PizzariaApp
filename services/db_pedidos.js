@@ -1,7 +1,10 @@
 import * as SQLite from 'expo-sqlite';
 import getDbConnection from 'dbservice.js';
 
-export async function createTable() {
+
+export class Pedido {
+
+    static async createTable() {
     return new Promise((resolve, reject) => {
         const query = `CREATE TABLE IF NOT EXISTS tbPedidos
         (
@@ -23,4 +26,25 @@ export async function createTable() {
             }
         );
     });
-};
+        
+    };
+
+    static geraObjSelect(registros){
+        var retorno = [];
+
+        for (let n = 0; n < registros.rows.length; n++) {
+            let obj = {
+                id: registros.rows.item(n).id,
+                total: registros.rows.item(n).total,
+                cep: registros.rows.item(n).cep
+            }
+            retorno.push(obj);
+        }
+        return retorno;
+    }
+
+    static listaPedidos(){
+        lista('select * from tbPedidos', geraObjSelect)
+    }
+
+}
