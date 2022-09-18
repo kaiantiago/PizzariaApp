@@ -147,7 +147,7 @@ export default function Comprar({navigation}) {
         if (index > -1) {
             arr.splice(index, 1);
         }
-        prodsCompra = arr;
+        setProdsCompra(arr);
     }
 
     function confirmaCompra() {
