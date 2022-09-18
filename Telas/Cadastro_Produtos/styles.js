@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     textBtnVoltar: {
-        fontSize: 15,
+        fontSize: 14,
         color: '#ffffff',
         fontWeight: 'bold'
     },
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
     caixaTexto: {
         borderColor: "#000",
-        borderWidth: 2,
+        borderWidth: 1,
         height: 50,
         width: '100%',
         paddingHorizontal: 10,
@@ -103,16 +103,16 @@ const styles = StyleSheet.create({
     botao: {
         width: '30%',
         height: 50,
-        borderColor: "#000",
-        borderWidth: 2,
         borderRadius: 30,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#01f601',
-        marginTop:10
+        marginTop:10,
+       
     },
     textoBotao: {
         color: '#FFF',
+        fontWeight: 'bold'
     },
 })
 

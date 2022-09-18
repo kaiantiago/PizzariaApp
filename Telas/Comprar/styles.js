@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     areaBtnVoltar: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around'
+        alignSelf: 'center',
+        justifyContent: 'space-around',
     },
     btnVoltar: {
         width: '12%',
@@ -32,9 +33,9 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     textBtnVoltar: {
-        fontSize: 15,
+        fontSize: 14,
         color: '#ffffff',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     }
 })
 

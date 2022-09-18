@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     textBtnVoltar: {
-        fontSize: 15,
+        fontSize: 14,
         color: '#ffffff',
         fontWeight: 'bold'
     },
@@ -105,7 +105,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#01f601',
     },
     textoBotao: {
-        color: '#FFF',
+        color: '#FFFFFF',
+        fontWeight: 'bold'
     },
 })
 

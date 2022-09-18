@@ -20,8 +20,6 @@ export default function Cadastro_Produtos({ navigation }) {
     const [precoUn, setPrecoUn] = useState();
     const [idCat, setIdCat] = useState();
     const [produtos, setProdutos] = useState([]);
-    
-    
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [categorias, setCategorias] = useState([])
@@ -37,6 +35,7 @@ export default function Cadastro_Produtos({ navigation }) {
   
       await carregaDados();
     }
+    
   
 
     useEffect(
@@ -196,8 +195,8 @@ export default function Cadastro_Produtos({ navigation }) {
             </View>
 
             
-            <TouchableOpacity style={styles.botao} onPress={() => salvaDados()}>
-                <Text style={styles.textoBotao}>Salvar</Text>
+            <TouchableOpacity style={styles.button} onPress={() => salvaDados()}>
+                <Text style={styles.textButton}>Cadastrar</Text>
             </TouchableOpacity>
             
             <ScrollView style={styles.listaProdutos}>

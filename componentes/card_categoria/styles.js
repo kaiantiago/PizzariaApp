@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 
     contato: {
-        backgroundColor: '#aada36',
+        backgroundColor: '#FFFFFF',
         flexDirection: 'row',
         height: 80,
         alignItems: 'center',
         margin: 10,
-        borderRadius: 5,
+        borderRadius: 30,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
