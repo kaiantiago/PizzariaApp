@@ -168,12 +168,12 @@ export default function Comprar({navigation}) {
         try {
             Produto.listaProdutosFiltro(idCateg).then((resposta) => {
 
-                let produts = resposta;
+                let produts = [];
                 resposta.forEach(element => {
                     todosProdutos.push(element);
                     produts.push({label: element.descricao, value: element.id});
                 });
-                //console.log(produts);
+                console.log(produts);
                 setProdutos(produts);
             })
           } catch (e) {
