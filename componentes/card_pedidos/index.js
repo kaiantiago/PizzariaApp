@@ -5,6 +5,6 @@ import {
 import styles from './styles';
 import { Ionicons, Entypo } from '@expo/vector-icons';
 
-export default function CardCategoria({pedido, listaProdutos}) {
+export default function CardPedidos({pedido, listaProdutos}) {
     
 }
