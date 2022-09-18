@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: 85,
         marginLeft: 20
-
     },
     areaBtnVoltar: {
         flexDirection: 'row',

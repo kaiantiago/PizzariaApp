@@ -21,8 +21,11 @@ const styles = StyleSheet.create({
     listaNome: {
         width: '90%',
         fontSize: 26,
-        paddingRight: 10,
         paddingLeft: 10
+    },
+    txtPreco:{
+        width: "20%",
+        fontSize: 18,
     },
 
     dadosListaTelefone: {
@@ -38,11 +41,9 @@ const styles = StyleSheet.create({
         marginRight: 5,
     },
     listaTelefone: {
-        color: "#FFF",
+        color: "#FFFFFF",
         fontSize: 18,
     },
-
-
 });
 
 

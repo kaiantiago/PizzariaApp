@@ -20,7 +20,6 @@ export default function CardCategoria({categoria, removerElemento, editar}) {
                <TouchableOpacity onPress={() => editar(categoria.idC)}>
                    <Entypo name="edit" size={32} color="black" />
                </TouchableOpacity>
-
            </View>
        </View>
    );

@@ -19,10 +19,13 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     listaNome: {
-        width: '90%',
+        width: '70%',
         fontSize: 26,
-        paddingRight: 10,
         paddingLeft: 10
+    },
+    txtPreco:{
+        width: "20%",
+        fontSize: 18,
     },
 
     dadosListaTelefone: {
