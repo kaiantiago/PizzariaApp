@@ -17,6 +17,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 export default function Comprar({ navigation }) {
 
+    DropDownPicker.setListMode("SCROLLVIEW");
     const [id, setId] = useState();
     const [cep, setCep] = useState();
     const [total, setTotal] = useState();
@@ -130,7 +131,8 @@ export default function Comprar({ navigation }) {
 
     function add1Prod(identificador) {
         const prodCompra = prodsCompra.find(produto => produto.id == identificador);
-        prodCompra.qtd += 1;
+        prodCompra.qtd -= 1;
+        prodCompra.qtd += 2;
         carregaDados();
     }
 
@@ -249,14 +251,12 @@ export default function Comprar({ navigation }) {
                     <Text style={styles.textoBotao}>Adicionar ao carrinho</Text>
                 </TouchableOpacity>
 
-                <ScrollView style={styles.listaProdutos}>
-                    {
+                {
                         prodsCompra.map((produto, index) => (
                             <CardProdutoCompra produto={produto} key={index.toString()}
                                 adicionar1={add1Prod} remover1={sub1Prod} />
                         ))
                     }
-                </ScrollView>
 
                 <View style={styles.areaPreco}>
                     <Text>Preço total: {total}</Text>
