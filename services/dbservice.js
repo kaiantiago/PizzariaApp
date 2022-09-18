@@ -80,9 +80,9 @@ export function createUniqueId() {
 export function exclui(query, id) {
     console.log('Apagando elemento da query' + query +" ;id:"+ id);
     return new Promise((resolve, reject) => {
-        let query = query;
+        
         let dbCx = getDbConnection();
-
+        
         dbCx.transaction(tx => {
             tx.executeSql(query, [id],
                 (tx, resultado) => {

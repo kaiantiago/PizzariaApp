@@ -37,11 +37,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     lblDropdown: {
-        marginTop: 100  
+        marginTop: 90  
     },
     campoDrop: {
         alignSelf: 'center',
-        marginTop: 20,
+        marginTop: 5,
+        marginBottom: 20,
         height: 40,
         width: 280,
         backgroundColor: "#FFFFFF",
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     areaDados: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        width: '100%',
+        width: '100%'
     },
     areaDescricao: {
         width: '55%',
@@ -108,6 +109,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#01f601',
+        marginTop:10
     },
     textoBotao: {
         color: '#FFF',

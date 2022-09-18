@@ -8,12 +8,10 @@ import { useState, useEffect } from 'react';
 
 import { createTables } from '../../services/db_base';
 
-import {
-  Produto
-} from '../../services/db_produtos';
+import {Produto} from '../../services/db_produtos';
+import {Categoria} from '../../services/db_categorias';
 import CardProduto from '../../componentes/card_produto';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { useState, useEffect } from 'react';
 
 export default function Cadastro_Produtos({ navigation }) {
 
@@ -23,6 +21,11 @@ export default function Cadastro_Produtos({ navigation }) {
     const [idCat, setIdCat] = useState();
     const [produtos, setProdutos] = useState([]);
     
+    
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [categorias, setCategorias] = useState([])
+
     let tabelasCriadas = false;
   
     async function processamentoUseEffect() {
@@ -50,7 +53,15 @@ export default function Cadastro_Produtos({ navigation }) {
             let produts = resposta;
             setProdutos(produts);
         })
-
+        Categoria.listaCategorias().then((resposta) => {
+            let categs = [];
+            console.log(resposta);
+            resposta.forEach(element => {
+              categs.push({label: element.descricao, value: element.idC})
+          });
+          console.log(categs);
+            setCategorias(categs);
+        })
         } catch (e) {
             console.log(e.toString());
             Alert.alert(e.toString());
@@ -64,7 +75,7 @@ export default function Cadastro_Produtos({ navigation }) {
           id: id,
           descricao: descricao,
           precoUn: precoUn,
-          idCat: idCat
+          idCat: value
         };
     
         try {
@@ -78,7 +89,7 @@ export default function Cadastro_Produtos({ navigation }) {
               Alert.alert('Falhou, sorry!');
           }
           else {      
-            let resposta = await Produto.alteraContato(obj);
+            let resposta = await Produto.alteraProduto(obj);
             if (resposta)
               Alert.alert('Alterado com sucesso!');
             else
@@ -98,6 +109,8 @@ export default function Cadastro_Produtos({ navigation }) {
         setIdCat("");
         setPrecoUn("");
         setId(undefined);
+        setValue(null);
+        setOpen(false);
         Keyboard.dismiss();
     }
 
@@ -106,16 +119,17 @@ export default function Cadastro_Produtos({ navigation }) {
     
         if (produto != undefined) {
           setId(produto.id);
-          setNome(produto.descricao);
+          setDescricao(produto.descricao);
           setPrecoUn(produto.precoUn);
           setIdCat(produto.idCat);
+          setValue(produto.idCat);
         }
     
-        console.log(contato);
+        console.log(produto);
     }
 
     function removerElemento(identificador) {
-        Alert.alert('Atenção', 'Confirma a remoção do contato?',
+        Alert.alert('Atenção', 'Confirma a remoção do produto?',
           [
             {
               text: 'Sim',
@@ -135,18 +149,12 @@ export default function Cadastro_Produtos({ navigation }) {
             Keyboard.dismiss();
             limparCampos();
             await carregaDados();
-            Alert.alert('Contato apagado com sucesso!!!');
+            Alert.alert('Produto apagado com sucesso!!!');
         } catch (e) {
             Alert.alert(e.message);
         }
     }
 
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
-    const [items, setItems] = useState([
-        { label: 'Apple', value: 'apple' },
-        { label: 'Banana', value: 'banana' }
-    ])
     return (
         <View style={styles.container}>
             <View style={styles.areaBtnVoltar}>
@@ -156,6 +164,17 @@ export default function Cadastro_Produtos({ navigation }) {
                     <Text style={styles.textBtnVoltar}> Voltar </Text>
                 </TouchableOpacity>
                 <Text style={styles.titulo}>Cadastro de Produtos</Text>
+            </View>
+            
+            <View>
+                <Text style={styles.lblDropdown}>Selecione a categoria</Text>
+                <DropDownPicker open={open}
+                    value={value}
+                    items={categorias}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    setItems={setCategorias} style={styles.campoDrop}>
+                </DropDownPicker>
             </View>
             
             <View style={styles.areaDados}>
@@ -175,6 +194,8 @@ export default function Cadastro_Produtos({ navigation }) {
                     keyboardType='num-pad' />
                 </View>
             </View>
+
+            
             <TouchableOpacity style={styles.botao} onPress={() => salvaDados()}>
                 <Text style={styles.textoBotao}>Salvar</Text>
             </TouchableOpacity>
@@ -186,19 +207,9 @@ export default function Cadastro_Produtos({ navigation }) {
                         removerElemento={removerElemento} editar={editar} />
                 ))
             }
+            </ScrollView>
 
-      </ScrollView>
-
-            <View>
-                <Text style={styles.lblDropdown}>Selecione a categoria</Text>
-                <DropDownPicker open={open}
-                    value={value}
-                    items={items}
-                    setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems} style={styles.campoDrop}>
-                </DropDownPicker>
-            </View>
+            
         </View>
     )
 }

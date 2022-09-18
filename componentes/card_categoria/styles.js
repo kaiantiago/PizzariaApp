@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 
     contato: {
-        backgroundColor: '#ed8f1c',
+        backgroundColor: '#aada36',
         flexDirection: 'row',
         height: 80,
         alignItems: 'center',
@@ -20,8 +20,9 @@ const styles = StyleSheet.create({
     },
     listaNome: {
         width: '90%',
-        fontSize: 18,
+        fontSize: 26,
         paddingRight: 10,
+        paddingLeft: 10
     },
 
     dadosListaTelefone: {

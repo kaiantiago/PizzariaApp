@@ -1,8 +1,130 @@
-import { react } from 'react';
-import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { useState, useEffect } from 'react';
 import styles from './styles';
+import { Categoria } from '../../services/db_categorias';
+import CardCategoria from '../../componentes/card_categoria';
+import {
+    Alert, Text, TextInput, TouchableOpacity,
+    View, Keyboard, ScrollView
+  } from 'react-native';
+
+import { createTables } from '../../services/db_base';
 
 export default function Cadastro_Categorias({ navigation }) {
+
+    const [id, setId] = useState();
+    const [descricao, setDescricao] = useState();
+    const [categorias, setCategorias] = useState([]);
+
+    let tabelasCriadas = false;
+  
+    async function processamentoUseEffect() {
+      if (!tabelasCriadas) {
+        console.log("Verificando necessidade de criar tabelas...");
+        tabelasCriadas = true;
+        await createTables();
+      }
+  
+      await carregaDados();
+    }
+  
+
+    useEffect(
+      () => {
+        console.log('executando useffect');
+        processamentoUseEffect();
+    }, []);
+  
+    
+    function carregaDados() {
+        try {
+          
+        Categoria.listaCategorias().then((resposta) => {
+            let categs = resposta;
+            setCategorias(categs);
+        })
+        } catch (e) {
+            console.log(e.toString());
+            Alert.alert(e.toString());
+        }
+    }
+
+    async function salvaDados() {
+        let novoRegistro = id == undefined;
+    
+        let obj = {
+          idC: id,
+          descricao: descricao
+        };
+    
+        try {
+          if (novoRegistro) {
+            let resposta = (await Categoria.adicionaCategoria(obj));
+    
+            if (resposta)
+              Alert.alert('adicionado com sucesso!');
+            else
+              Alert.alert('Falhou, sorry!');
+          }
+          else {      
+            let resposta = await Categoria.alteraCategoria(obj);
+            if (resposta)
+              Alert.alert('Alterado com sucesso!');
+            else
+              Alert.alert('Falhou, sorry!');
+          }
+          
+          limparCampos();
+          await carregaDados();
+        } catch (e) {
+          Alert.alert(e.message);
+        }
+      }
+      
+      
+    async function limparCampos() {
+        setDescricao("");
+        setId(undefined);
+        Keyboard.dismiss();
+    }
+
+    function editar(identificador) {
+        const categ = categorias.find(categ => categ.idC == identificador);
+    
+        if (categ != undefined) {
+          setId(categ.idC);
+          setDescricao(categ.descricao);
+        }
+    
+        console.log(categ);
+    }
+
+    function removerElemento(identificador) {
+        Alert.alert('Atenção', 'Confirma a remoção da Categoria?',
+          [
+            {
+              text: 'Sim',
+              onPress: () => efetivaRemoverElemento(identificador),
+            },
+            {
+              text: 'Não',
+              style: 'cancel',
+            }
+          ]);
+    }
+
+    
+    async function efetivaRemoverElemento(identificador) {
+        try {
+            await Categoria.excluiCategoria(identificador);
+            Keyboard.dismiss();
+            limparCampos();
+            await carregaDados();
+            Alert.alert('Categoria apagada com sucesso!!!');
+        } catch (e) {
+            Alert.alert(e.message);
+        }
+    }
+
 
     return (
         <View style={styles.container}>
@@ -16,12 +138,23 @@ export default function Cadastro_Categorias({ navigation }) {
             </View>
             <View>
                 <Text style={styles.lblCadastro}>Qual categoria quer cadastrar?</Text>
-                <TextInput style={styles.campoCadastro}>
+                <TextInput style={styles.campoCadastro}
+                    onChangeText={(texto) => setDescricao(texto)}
+                    value={descricao}>
                 </TextInput>
             </View>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => salvaDados()}>
                 <Text style={styles.textButton}>Cadastrar</Text>
             </TouchableOpacity>
+
+            <ScrollView style={styles.listaProdutos}>
+            {
+                categorias.map((categoria, index) => (
+                    <CardCategoria categoria={categoria} key={index.toString()}
+                        removerElemento={removerElemento} editar={editar} />
+                ))
+            }
+            </ScrollView>
         </View>
     )
 }

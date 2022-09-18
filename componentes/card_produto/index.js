@@ -11,9 +11,8 @@ export default function CardProduto({produto, removerElemento, editar}) {
        <View style={styles.contato} >
 
            <Text style={styles.listaNome}> {produto.descricao}</Text>
-           <View style={styles.dadosListaTelefone}>
-            <Text style={styles.listaTelefone} >{produto.preco} </Text>
-            </View>
+           
+           <Text style={styles.listaTelefone} >{produto.preco} </Text>
            <View style={styles.dadosBotoesAcao}>
                <TouchableOpacity onPress={() => removerElemento(produto.id)}>
                    <Ionicons name="md-remove-circle" size={32} color="red" />
