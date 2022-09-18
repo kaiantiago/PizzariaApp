@@ -20,7 +20,7 @@ export default function Comprar({ navigation }) {
     DropDownPicker.setListMode("SCROLLVIEW");
     const [id, setId] = useState();
     const [cep, setCep] = useState();
-    const [total, setTotal] = useState();
+    const [total, setTotal] = useState(0);
     const [qtd, setQtd] = useState();
     const [idCat, setIdCat] = useState();
     const [todosProdutos, setTodosProdutos] = useState([]);
@@ -213,6 +213,7 @@ export default function Comprar({ navigation }) {
             idPed: "",
             qtd: qtd
         }
+        setTotal(total + prod.precoUn*prod.qtd)
         console.log(prod);
         prodsCompra.push(prod);
         limparCampos();
@@ -276,7 +277,7 @@ export default function Comprar({ navigation }) {
                 </TouchableOpacity>
 
                 <Text></Text>
-                
+
                 {
                     prodsCompra.map((produto, index) => (
                         <CardProdutoCompra produto={produto} key={index.toString()}
@@ -285,7 +286,7 @@ export default function Comprar({ navigation }) {
                 }
 
                 <View style={styles.areaPreco}>
-                    <Text>Preço total: {total}</Text>
+                    <Text style={{fontSize: 28}}>Preço total:          R${total}</Text>
                 </View>
 
                 <View style={styles.areaDescricao}>

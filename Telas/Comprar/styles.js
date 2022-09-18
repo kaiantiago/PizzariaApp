@@ -82,19 +82,23 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     areaDescricao: {
-        width: '55%',
+        width: '80%',
         marginLeft: 20,
         flexDirection: 'row',
-        marginTop: 40
+        marginTop: 40,
+        alignSelf: 'center',
+        marginBottom: 12
     },
     txtCep: {
         marginTop: 12,
         marginRight: 10
     },
     areaPreco: {
-        width: '20%',
+        width: '80%',
+        alignSelf: 'center',
         marginLeft: 20,
-        marginTop: 40
+        marginTop: 40,
+        flexDirection: 'row'
     },
     listaProdutos: {
         width: '100%',
