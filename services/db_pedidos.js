@@ -51,10 +51,13 @@ export class Pedido {
     }
 
     static adicionaPedido(pedido, produtos){
-        var promises;
-        promises.push(adiciona('insert into tbPedidos (id, total, cep) values (?,?,?)', [createUniqueId(), pedido.total, pedido.cep] ));
+        var promises = [];
+        var novoId = createUniqueId()
+        promises.push(adiciona('insert into tbPedidos (id, total, cep) values (?,?,?)', [novoId, pedido.total, pedido.cep] ));
         
         produtos.forEach(element => {
+            element.idPed = novoId;
+            console.log(element);
             promises.push(ProdPedido.adicionaProdutoDoPedido(element))
         });
         return Promise.all(promises);

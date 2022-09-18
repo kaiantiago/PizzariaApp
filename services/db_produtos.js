@@ -50,7 +50,7 @@ export class Produto {
     }
 
     static listaProdutosFiltro(idCat){
-        return lista('select * from tbProdutos where idCat = ' + idCat, geraObjSelect)
+        return lista('select * from tbProdutos where idCat = "' + idCat+'"', geraObjSelect)
     }
 
     static adicionaProduto(pedido){

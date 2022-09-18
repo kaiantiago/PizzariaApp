@@ -62,7 +62,7 @@ export class ProdPedido {
 
 
     static listaProdutosDoPedido(idPed){
-        return lista('select * from tbProdutos as p inner join tbProdsPedidos as pp on p.id = pp.idProd where pp.idPed = ' + idPed, geraObjSelectPedido)
+        return lista('select * from tbProdutos as p inner join tbProdsPedidos as pp on p.id = pp.idProd where pp.idPed = "' + idPed+'"', geraObjSelectPedido)
     }
 
     static adicionaProdutoDoPedido(pedido){
