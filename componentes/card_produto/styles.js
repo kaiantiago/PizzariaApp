@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     dadosBotoesAcao: {
-        width: '10%',
+        width: '20%',
     },
     iconTelefone: {
         width: 20,

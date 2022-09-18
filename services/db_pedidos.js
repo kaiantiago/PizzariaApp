@@ -1,6 +1,21 @@
 import * as SQLite from 'expo-sqlite';
-import {getDbConnection, exclui, lista, createUniqueId} from 'dbservice.js';
+import {getDbConnection, exclui, lista, createUniqueId, adiciona} from './dbservice';
 import { ProdPedido } from './db_prods_pedidos';
+
+
+export function geraObjSelect(registros){
+    var retorno = [];
+
+    for (let n = 0; n < registros.rows.length; n++) {
+        let obj = {
+            id: registros.rows.item(n).id,
+            total: registros.rows.item(n).total,
+            cep: registros.rows.item(n).cep
+        }
+        retorno.push(obj);
+    }
+    return retorno;
+}
 
 export class Pedido {
 
@@ -29,19 +44,7 @@ export class Pedido {
         
     };
 
-    static geraObjSelect(registros){
-        var retorno = [];
-
-        for (let n = 0; n < registros.rows.length; n++) {
-            let obj = {
-                id: registros.rows.item(n).id,
-                total: registros.rows.item(n).total,
-                cep: registros.rows.item(n).cep
-            }
-            retorno.push(obj);
-        }
-        return retorno;
-    }
+    
 
     static listaPedidos(){
         return lista('select * from tbPedidos', geraObjSelect)

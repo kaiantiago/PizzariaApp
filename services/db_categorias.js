@@ -1,5 +1,18 @@
 import * as SQLite from 'expo-sqlite';
-import {getDbConnection, exclui, lista, createUniqueId} from 'dbservice.js';
+import {getDbConnection, exclui, lista, createUniqueId, adiciona} from './dbservice';
+
+export function geraObjSelect(registros){
+    var retorno = [];
+
+    for (let n = 0; n < registros.rows.length; n++) {
+        let obj = {
+            idC: registros.rows.item(n).idC,
+            descricao: registros.rows.item(n).descricao
+        }
+        retorno.push(obj);
+    }
+    return retorno;
+}
 
 export class Categoria {
 
@@ -26,18 +39,6 @@ export class Categoria {
         });
     };
 
-    static geraObjSelect(registros){
-        var retorno = [];
-
-        for (let n = 0; n < registros.rows.length; n++) {
-            let obj = {
-                idC: registros.rows.item(n).idC,
-                descricao: registros.rows.item(n).descricao
-            }
-            retorno.push(obj);
-        }
-        return retorno;
-    }
 
     static listaCategorias(){
         return lista('select * from tbCategorias', geraObjSelect)

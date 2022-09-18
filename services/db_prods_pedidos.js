@@ -1,6 +1,23 @@
 import * as SQLite from 'expo-sqlite';
-import {getDbConnection, exclui, lista, createUniqueId} from 'dbservice.js';
+import {getDbConnection, exclui, lista, createUniqueId, adiciona} from './dbservice';
 
+export function geraObjSelectPedido(registros){
+    var retorno = [];
+
+    for (let n = 0; n < registros.rows.length; n++) {
+        let obj = {
+            id: registros.rows.item(n).id,
+            descricao: registros.rows.item(n).descricao,
+            preco: registros.rows.item(n).preco,
+            idCat: registros.rows.item(n).idCat,
+            idProd: registros.rows.item(n).idProd,
+            idPed: registros.rows.item(n).idPed,
+            qtd: registros.rows.item(n).qtd
+        }
+        retorno.push(obj);
+    }
+    return retorno;
+}
 
 export class ProdPedido {
 
@@ -41,23 +58,7 @@ export class ProdPedido {
         return retorno;
     }
 
-    static geraObjSelectPedido(registros){
-        var retorno = [];
-
-        for (let n = 0; n < registros.rows.length; n++) {
-            let obj = {
-                id: registros.rows.item(n).id,
-                descricao: registros.rows.item(n).descricao,
-                preco: registros.rows.item(n).preco,
-                idCat: registros.rows.item(n).idCat,
-                idProd: registros.rows.item(n).idProd,
-                idPed: registros.rows.item(n).idPed,
-                qtd: registros.rows.item(n).qtd
-            }
-            retorno.push(obj);
-        }
-        return retorno;
-    }
+    
 
 
     static listaProdutosDoPedido(idPed){

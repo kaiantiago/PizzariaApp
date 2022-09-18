@@ -1,6 +1,20 @@
 import * as SQLite from 'expo-sqlite';
-import {getDbConnection, exclui, lista, createUniqueId} from 'dbservice.js';
+import {getDbConnection, exclui, lista, createUniqueId, adiciona} from './dbservice';
 
+export function geraObjSelect(registros){
+    var retorno = [];
+
+    for (let n = 0; n < registros.rows.length; n++) {
+        let obj = {
+            id: registros.rows.item(n).id,
+            descricao: registros.rows.item(n).descricao,
+            precoUn: registros.rows.item(n).precoUn,
+            idCat: registros.rows.item(n).idCat
+        }
+        retorno.push(obj);
+    }
+    return retorno;
+}
 
 export class Produto {
 
@@ -10,7 +24,7 @@ export class Produto {
         (
             id text not null primary key,
             descricao text not null,
-            preco int not null,
+            precoUn int not null,
             idCat text not null     
         )`;
 
@@ -29,20 +43,7 @@ export class Produto {
     });
     };
 
-    static geraObjSelect(registros){
-        var retorno = [];
-
-        for (let n = 0; n < registros.rows.length; n++) {
-            let obj = {
-                id: registros.rows.item(n).id,
-                descricao: registros.rows.item(n).descricao,
-                precoUn: registros.rows.item(n).precoUn,
-                idCat: registros.rows.item(n).idCat
-            }
-            retorno.push(obj);
-        }
-        return retorno;
-    }
+    
 
     static listaProdutos(){
         return lista('select * from tbProdutos', geraObjSelect)
@@ -53,7 +54,7 @@ export class Produto {
     }
 
     static adicionaProduto(pedido){
-        return adiciona('insert into tbProdutos (id, descricao, precoUn, idCat) values (?,?,?)', [createUniqueId(), pedido.descricao, pedido.precoUn, pedido.idCat] );
+        return adiciona('insert into tbProdutos (id, descricao, precoUn, idCat) values (?,?,?,?)', [createUniqueId(), pedido.descricao, pedido.precoUn, pedido.idCat] );
     }
 
     static alteraProduto(pedido){
