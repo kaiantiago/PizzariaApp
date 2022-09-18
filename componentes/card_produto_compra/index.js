@@ -6,7 +6,6 @@ import styles from './styles';
 import { Ionicons, Entypo } from '@expo/vector-icons';
 import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
 
-
 export default function CardProdutoCompra({produto, adicionar1, remover1}) {
    return (
        <View style={styles.contato} >

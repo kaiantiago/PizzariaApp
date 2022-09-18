@@ -1,8 +1,15 @@
-import { react, useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { react, useState, useEffect } from 'react';
+import {
+    Alert, Text, TextInput, TouchableOpacity,
+    View, Keyboard, ScrollView
+  } from 'react-native';
+
 import styles from './styles';
 import { Pedido } from '../../services/db_pedidos';
 import { ProdPedido } from '../../services/db_prods_pedidos';
+import { createTables } from '../../services/db_base';
+import CardPedidos from '../../componentes/card_pedidos';
+
 //Lista de Pedidos
 
 export default function Admin({ navigation }) {
@@ -30,7 +37,6 @@ export default function Admin({ navigation }) {
         console.log('executando useffect');
         processamentoUseEffect();
     }, []);
-  
     
     function carregaDados() {
         try {
@@ -38,6 +44,8 @@ export default function Admin({ navigation }) {
             let ped = resposta;
             ProdPedido.listaProdutosDoPedido(ped.idPed).then((resposta) => {
                 produtos.push(resposta);
+                console.log(resposta)
+                console.log('cheguei')
             })
             setPedidos(ped);
         })
@@ -62,7 +70,7 @@ export default function Admin({ navigation }) {
             {
                 pedidos.map((pedido, index) => (
                     <CardPedidos pedido={pedido} key={index.toString()}
-                        listaProdutos={produtos[index]}  />
+                        listaProdutos={produtos[index]}/>
                 ))
             }
             </ScrollView>
