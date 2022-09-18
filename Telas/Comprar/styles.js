@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 85,
-        marginLeft: 20
+        marginLeft: 20,
     },
     areaBtnVoltar: {
         flexDirection: 'row',
@@ -38,10 +38,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     lblDropdown2: {
-        marginTop: 90  
+        marginTop: 90,
+        marginLeft: 70
     },
     lblDropdown: {
-        marginTop: 10  
+        marginTop: 10,
+        marginLeft: 70
     },
     campoDrop: {
         alignSelf: 'center',
@@ -81,9 +83,17 @@ const styles = StyleSheet.create({
     },
     areaDescricao: {
         width: '55%',
+        marginLeft: 20,
+        flexDirection: 'row'
+    },
+    txtCep: {
+        marginTop: 12,
+        marginRight: 10
     },
     areaPreco: {
-        width: '30%',
+        width: '20%',
+        marginLeft: 20,
+        marginTop: 30
     },
     listaProdutos: {
         width: '100%',
@@ -98,26 +108,48 @@ const styles = StyleSheet.create({
     },
     caixaTexto: {
         borderColor: "#000",
-        borderWidth: 2,
+        borderWidth: 1,
         height: 50,
-        width: '100%',
+        width: '12%',
         paddingHorizontal: 10,
         borderRadius: 10,
     },
     botao: {
-        width: '30%',
-        height: 50,
-        borderColor: "#000",
-        borderWidth: 2,
-        borderRadius: 30,
+        width: '45%',
+        height: 60,
+        borderRadius: 22,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#01f601',
-        marginTop:10
+        marginTop: 20,
+        alignSelf: 'center'
     },
     textoBotao: {
         color: '#FFF',
+        fontWeight: 'bold',
+        fontSize: 16
     },
+    scroll: {
+        alignSelf: 'center',
+        width: "100%"
+    },
+    areaQtd: {
+        flexDirection: 'row',
+        marginTop: 10
+    },
+    txtQtd: {
+        marginTop: 12,
+        marginRight: 10,
+        marginLeft: 180
+    },
+    caixaCep: {
+        borderColor: "#000",
+        borderWidth: 1,
+        height: 50,
+        width: '50%',
+        paddingHorizontal: 10,
+        borderRadius: 10,
+    }
 })
 
 export default styles;

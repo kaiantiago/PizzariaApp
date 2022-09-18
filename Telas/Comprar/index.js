@@ -1,13 +1,13 @@
 import { react, useState, useEffect } from 'react';
 import styles from './styles';
-import {Produto} from '../../services/db_produtos';
-import {Categoria} from '../../services/db_categorias';
+import { Produto } from '../../services/db_produtos';
+import { Categoria } from '../../services/db_categorias';
 import CardProdutoCompra from '../../componentes/card_produto_compra';
 import { Pedido } from '../../services/db_pedidos';
 
 import {
-  Alert, Text, TextInput, TouchableOpacity,
-  View, Keyboard, ScrollView, Image
+    Alert, Text, TextInput, TouchableOpacity,
+    View, Keyboard, ScrollView, Image
 } from 'react-native';
 
 import { createTables } from '../../services/db_base';
@@ -15,7 +15,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 
 
-export default function Comprar({navigation}) {
+export default function Comprar({ navigation }) {
 
     const [id, setId] = useState();
     const [cep, setCep] = useState();
@@ -27,8 +27,8 @@ export default function Comprar({navigation}) {
     const [openP, setOpenP] = useState(false);
     const [valueP, setValueP] = useState(null);
     const [produtos, setProdutos] = useState([]);
-    
-    
+
+
     const [openC, setOpenC] = useState(false);
     const [valueC, setValueC] = useState(null);
     const [categorias, setCategorias] = useState([]);
@@ -36,36 +36,36 @@ export default function Comprar({navigation}) {
     const [prodsCompra, setProdsCompra] = useState([]);
 
     let tabelasCriadas = false;
-  
+
     async function processamentoUseEffect() {
-      if (!tabelasCriadas) {
-        console.log("Verificando necessidade de criar tabelas...");
-        tabelasCriadas = true;
-        await createTables();
-      }
-  
-      await carregaDados();
+        if (!tabelasCriadas) {
+            console.log("Verificando necessidade de criar tabelas...");
+            tabelasCriadas = true;
+            await createTables();
+        }
+
+        await carregaDados();
     }
-  
+
 
     useEffect(
-      () => {
-        console.log('executando useffect');
-        processamentoUseEffect();
-    }, []);
-  
-    
+        () => {
+            console.log('executando useffect');
+            processamentoUseEffect();
+        }, []);
+
+
     function carregaDados() {
         try {
-        Categoria.listaCategorias().then((resposta) => {
-            let categs = [];
-            //console.log(resposta);
-            resposta.forEach(element => {
-              categs.push({label: element.descricao, value: element.idC})
-          });
-          //console.log(categs);
-            setCategorias(categs);
-        })
+            Categoria.listaCategorias().then((resposta) => {
+                let categs = [];
+                //console.log(resposta);
+                resposta.forEach(element => {
+                    categs.push({ label: element.descricao, value: element.idC })
+                });
+                //console.log(categs);
+                setCategorias(categs);
+            })
         } catch (e) {
             console.log(e.toString());
             Alert.alert(e.toString());
@@ -76,32 +76,32 @@ export default function Comprar({navigation}) {
         let total = 0;
         //console.log(prodsCompra);
         prodsCompra.forEach(element => {
-            total+=element.precoUn*element.qtd;
+            total += element.precoUn * element.qtd;
         });
 
         let obj = {
-          id: id,
-          total: total,
-          cep: cep
+            id: id,
+            total: total,
+            cep: cep
         };
-    
+
         try {
 
             let resposta = (await Pedido.adicionaPedido(obj, prodsCompra));
-    
+
             if (resposta)
-              Alert.alert('Compra realizada com sucesso!!!');
+                Alert.alert('Compra realizada com sucesso!!!');
             else
-              Alert.alert('Falha na compra, sorry!');
-          
-          limparTodosCampos();
-          await carregaDados();
+                Alert.alert('Falha na compra, sorry!');
+
+            limparTodosCampos();
+            await carregaDados();
         } catch (e) {
-          Alert.alert(e.message);
+            Alert.alert(e.message);
         }
-      }
-      
-      
+    }
+
+
     async function limparCampos() {
         setQtd("");
         setValueC(null);
@@ -130,14 +130,14 @@ export default function Comprar({navigation}) {
 
     function add1Prod(identificador) {
         const prodCompra = prodsCompra.find(produto => produto.id == identificador);
-        prodCompra.qtd+=1;
+        prodCompra.qtd += 1;
         carregaDados();
     }
 
     function sub1Prod(identificador) {
         const prodCompra = prodsCompra.find(produto => produto.id == identificador);
-        prodCompra.qtd-=1;
-        if(prodCompra.qtd<=0)
+        prodCompra.qtd -= 1;
+        if (prodCompra.qtd <= 0)
             removeItemOnce(prodsCompra, prodCompra);
         carregaDados();
     }
@@ -152,39 +152,39 @@ export default function Comprar({navigation}) {
 
     function confirmaCompra() {
         Alert.alert('Atenção', 'Confirma realização da compra?',
-          [
-            {
-              text: 'Sim',
-              onPress: () => salvaDados(),
-            },
-            {
-              text: 'Não',
-              style: 'cancel',
-            }
-          ]);
+            [
+                {
+                    text: 'Sim',
+                    onPress: () => salvaDados(),
+                },
+                {
+                    text: 'Não',
+                    style: 'cancel',
+                }
+            ]);
     }
 
-    function atualizaComboProds(idCateg){
+    function atualizaComboProds(idCateg) {
         try {
             Produto.listaProdutosFiltro(idCateg).then((resposta) => {
 
                 let produts = resposta;
                 resposta.forEach(element => {
                     todosProdutos.push(element);
-                    produts.push({label: element.descricao, value: element.id});
+                    produts.push({ label: element.descricao, value: element.id });
                 });
                 //console.log(produts);
                 setProdutos(produts);
             })
-          } catch (e) {
-              console.log(e.toString());
-              Alert.alert(e.toString());
-          }
+        } catch (e) {
+            console.log(e.toString());
+            Alert.alert(e.toString());
+        }
 
-        
+
     }
 
-    function addCarrinho(){
+    function addCarrinho() {
         const prodCompra = todosProdutos.find(produto => produto.id == valueP);
         let prod = {
             id: valueP,
@@ -193,89 +193,88 @@ export default function Comprar({navigation}) {
             precoUn: prodCompra.precoUn,
             idProd: valueP,
             idPed: "",
-            qtd: qtd 
+            qtd: qtd
         }
         console.log(prod);
         prodsCompra.push(prod);
         limparCampos();
     }
 
-    return(
+    return (
         <View style={styles.container}>
-            <View style={styles.areaBtnVoltar}>
-                <TouchableOpacity style={styles.btnVoltar} onPress={
-                    () => navigation.navigate('Home')
-                }>
-                    <Text style={styles.textBtnVoltar}> Voltar </Text>
-                </TouchableOpacity>
-                <Text style={styles.titulo}>Faça um pedido</Text>
-            </View>
-
-            <View>
-                <Text style={styles.lblDropdown2}>Selecione a categoria</Text>
-                <DropDownPicker open={openC}
-                    value={valueC}
-                    items={categorias}
-                    setOpen={setOpenC}
-                    setValue={setValueC}
-                    setItems={setCategorias} 
-                    onChangeValue={(value)=>atualizaComboProds(value)} style={styles.campoDrop}>
-                </DropDownPicker>
-            </View>
-            
-            <View>
-                <Text style={styles.lblDropdown}>Selecione o produto</Text>
-                <DropDownPicker open={openP}
-                    value={valueP}
-                    items={produtos}
-                    setOpen={setOpenP}
-                    setValue={setValueP}
-                    setItems={setProdutos} style={styles.campoDrop}>
-                </DropDownPicker>
-            </View>
-
-            <View style={styles.areaDados}>
-
-                <View style={styles.areaPreco}>
-                <Text>Quantidade</Text>
-                <TextInput style={styles.caixaTexto}
-                    onChangeText={(texto) => setQtd(texto)}
-                    value={qtd}/>
+            <ScrollView style={styles.scroll}>
+                <View style={styles.areaBtnVoltar}>
+                    <TouchableOpacity style={styles.btnVoltar} onPress={
+                        () => navigation.navigate('Home')
+                    }>
+                        <Text style={styles.textBtnVoltar}> Voltar </Text>
+                    </TouchableOpacity>
+                    <Text style={styles.titulo}>Faça um pedido</Text>
                 </View>
 
-            </View>
+                <View>
+                    <Text style={styles.lblDropdown2}>Selecione a categoria</Text>
+                    <DropDownPicker open={openC}
+                        value={valueC}
+                        items={categorias}
+                        setOpen={setOpenC}
+                        setValue={setValueC}
+                        setItems={setCategorias}
+                        onChangeValue={(value) => atualizaComboProds(value)} style={styles.campoDrop}>
+                    </DropDownPicker>
+                </View>
 
-            <TouchableOpacity style={styles.botao} onPress={() => addCarrinho()}>
-                <Text style={styles.textoBotao}>Adicionar ao carrinho</Text>
-            </TouchableOpacity>
+                <View>
+                    <Text style={styles.lblDropdown}>Selecione o produto</Text>
+                    <DropDownPicker open={openP}
+                        value={valueP}
+                        items={produtos}
+                        setOpen={setOpenP}
+                        setValue={setValueP}
+                        setItems={setProdutos} style={styles.campoDrop}>
+                    </DropDownPicker>
+                </View>
 
-            <ScrollView style={styles.listaProdutos}>
-            {
-                prodsCompra.map((produto, index) => (
-                    <CardProdutoCompra produto={produto} key={index.toString()}
-                    adicionar1={add1Prod} remover1={sub1Prod} />
-                ))
-            }
+                <View style={styles.areaDados}>
+
+                    <View style={styles.areaQtd}>
+                        <Text style={styles.txtQtd}>Quantidade</Text>
+                        <TextInput style={styles.caixaTexto}
+                            onChangeText={(texto) => setQtd(texto)}
+                            value={qtd} />
+                    </View>
+
+                </View>
+
+                <TouchableOpacity style={styles.botao} onPress={() => addCarrinho()}>
+                    <Text style={styles.textoBotao}>Adicionar ao carrinho</Text>
+                </TouchableOpacity>
+
+                <ScrollView style={styles.listaProdutos}>
+                    {
+                        prodsCompra.map((produto, index) => (
+                            <CardProdutoCompra produto={produto} key={index.toString()}
+                                adicionar1={add1Prod} remover1={sub1Prod} />
+                        ))
+                    }
+                </ScrollView>
+
+                <View style={styles.areaPreco}>
+                    <Text>Preço total: {total}</Text>
+                </View>
+
+                <View style={styles.areaDescricao}>
+                    <Text style={styles.txtCep}>Cep para entrega</Text>
+                    <TextInput style={styles.caixaCep}
+                        onChangeText={(texto) => setCep(texto)}
+                        value={cep} />
+                </View>
+
+                <TouchableOpacity style={styles.botao} onPress={() => confirmaCompra()}>
+                    <Text style={styles.textoBotao}>Finalizar compra</Text>
+                </TouchableOpacity>
+                <Text></Text>
             </ScrollView>
-
-            <View style={styles.areaPreco}>
-                <Text>Preço total: {total}</Text>
-            </View>
-            
-
-            <View style={styles.areaDescricao}>
-            <Text>Cep para entrega</Text>
-            <TextInput style={styles.caixaTexto}
-                onChangeText={(texto) => setCep(texto)}
-                value={cep} />
-            </View>
-
-            <TouchableOpacity style={styles.botao} onPress={() => confirmaCompra()}>
-                <Text style={styles.textoBotao}>Finalizar compra</Text>
-            </TouchableOpacity>
-            
-          
-
 
         </View>
     )

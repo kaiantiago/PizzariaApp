@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 
     contato: {
-        backgroundColor: '#aada36',
+        backgroundColor: '#FFFFFF',
         flexDirection: 'row',
         height: 80,
         alignItems: 'center',
         margin: 10,
-        borderRadius: 5,
+        borderRadius: 30,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     listaNome: {
-        width: '90%',
+        width: '85%',
         fontSize: 18,
         paddingRight: 10,
     },
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     dadosBotoesAcao: {
-        width: '20%',
+        width: '20%'
     },
     iconTelefone: {
         width: 20,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         marginRight: 5,
     },
     listaTelefone: {
-        color: "#FFF",
+        color: "#000",
         fontSize: 18,
     },
 
