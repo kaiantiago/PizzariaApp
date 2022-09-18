@@ -12,8 +12,10 @@ import {
   Produto
 } from '../../services/db_produtos';
 import CardProduto from '../../componentes/card_produto';
+import DropDownPicker from 'react-native-dropdown-picker';
+import { useState, useEffect } from 'react';
 
-export default function Cadastro_Produtos({navigation}) {
+export default function Cadastro_Produtos({ navigation }) {
 
     const [id, setId] = useState();
     const [descricao, setDescricao] = useState();
@@ -139,7 +141,13 @@ export default function Cadastro_Produtos({navigation}) {
         }
     }
 
-    return(
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
+        { label: 'Apple', value: 'apple' },
+        { label: 'Banana', value: 'banana' }
+    ])
+    return (
         <View style={styles.container}>
             <View style={styles.areaBtnVoltar}>
                 <TouchableOpacity style={styles.btnVoltar} onPress={
@@ -181,6 +189,16 @@ export default function Cadastro_Produtos({navigation}) {
 
       </ScrollView>
 
+            <View>
+                <Text style={styles.lblDropdown}>Selecione a categoria</Text>
+                <DropDownPicker open={open}
+                    value={value}
+                    items={items}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    setItems={setItems} style={styles.campoDrop}>
+                </DropDownPicker>
+            </View>
         </View>
     )
 }

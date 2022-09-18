@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 import styles from './styles';
 
 export default function Cadastro_Categorias({ navigation }) {
+
     return (
         <View style={styles.container}>
             <View style={styles.areaBtnVoltar}>
@@ -19,8 +20,8 @@ export default function Cadastro_Categorias({ navigation }) {
                 </TextInput>
             </View>
             <TouchableOpacity style={styles.button}>
-                    <Text style={styles.textButton}>Cadastrar</Text>
-                </TouchableOpacity>
+                <Text style={styles.textButton}>Cadastrar</Text>
+            </TouchableOpacity>
         </View>
     )
 }
