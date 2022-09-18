@@ -94,7 +94,7 @@ export default function Comprar({navigation}) {
             else
               Alert.alert('Falha na compra, sorry!');
           
-          limparCampos();
+          limparTodosCampos();
           await carregaDados();
         } catch (e) {
           Alert.alert(e.message);
@@ -110,8 +110,21 @@ export default function Comprar({navigation}) {
         setOpenC(false);
         setOpenP(false);
         setProdutos([]);
+        setTodosProdutos([]);
+        Keyboard.dismiss();
+    }
+
+    async function limparTodosCampos() {
+        setQtd("");
+        setValueC(null);
+        setValueP(null);
+        setId(undefined);
+        setOpenC(false);
+        setOpenP(false);
+        setProdutos([]);
         setProdsCompra([]);
         setTodosProdutos([]);
+        setCep("");
         Keyboard.dismiss();
     }
 
