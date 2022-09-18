@@ -59,11 +59,11 @@ export default function Comprar({navigation}) {
         try {
         Categoria.listaCategorias().then((resposta) => {
             let categs = [];
-            console.log(resposta);
+            //console.log(resposta);
             resposta.forEach(element => {
               categs.push({label: element.descricao, value: element.idC})
           });
-          console.log(categs);
+          //console.log(categs);
             setCategorias(categs);
         })
         } catch (e) {
@@ -74,7 +74,7 @@ export default function Comprar({navigation}) {
 
     async function salvaDados() {
         let total = 0;
-
+        //console.log(prodsCompra);
         prodsCompra.forEach(element => {
             total+=element.precoUn*element.qtd;
         });
@@ -110,6 +110,7 @@ export default function Comprar({navigation}) {
         setOpenC(false);
         setOpenP(false);
         setProdutos([]);
+        setProdsCompra([]);
         setTodosProdutos([]);
         Keyboard.dismiss();
     }
@@ -159,7 +160,7 @@ export default function Comprar({navigation}) {
                     todosProdutos.push(element);
                     produts.push({label: element.descricao, value: element.id});
                 });
-                console.log(produts);
+                //console.log(produts);
                 setProdutos(produts);
             })
           } catch (e) {
@@ -177,8 +178,11 @@ export default function Comprar({navigation}) {
             idCat: valueC,
             descricao: prodCompra.descricao,
             precoUn: prodCompra.precoUn,
+            idProd: valueP,
+            idPed: "",
             qtd: qtd 
         }
+        console.log(prod);
         prodsCompra.push(prod);
         limparCampos();
     }
@@ -242,9 +246,8 @@ export default function Comprar({navigation}) {
             </ScrollView>
 
             <View style={styles.areaPreco}>
-                <Text>Preço total</Text>
-                <Text style={styles.caixaTexto}>{total}</Text>
-                </View>
+                <Text>Preço total: {total}</Text>
+            </View>
             
 
             <View style={styles.areaDescricao}>
