@@ -147,7 +147,7 @@ export default function Comprar({ navigation }) {
         if (index > -1) {
             arr.splice(index, 1);
         }
-        prodsCompra = arr;
+        setProdsCompra(arr);
     }
 
     function confirmaCompra() {
@@ -168,12 +168,12 @@ export default function Comprar({ navigation }) {
         try {
             Produto.listaProdutosFiltro(idCateg).then((resposta) => {
 
-                let produts = resposta;
+                let produts = [];
                 resposta.forEach(element => {
                     todosProdutos.push(element);
                     produts.push({ label: element.descricao, value: element.id });
                 });
-                //console.log(produts);
+                console.log(produts);
                 setProdutos(produts);
             })
         } catch (e) {
@@ -226,7 +226,7 @@ export default function Comprar({ navigation }) {
 
                 <View>
                     <Text style={styles.lblDropdown}>Selecione o produto</Text>
-                    <DropDownPicker open={openP}
+                    <DropDownPicker zIndex={1000} open={openP}
                         value={valueP}
                         items={produtos}
                         setOpen={setOpenP}
@@ -236,12 +236,11 @@ export default function Comprar({ navigation }) {
                 </View>
 
                 <View style={styles.areaDados}>
-
                     <View style={styles.areaQtd}>
                         <Text style={styles.txtQtd}>Quantidade</Text>
                         <TextInput style={styles.caixaTexto}
                             onChangeText={(texto) => setQtd(texto)}
-                            value={qtd} />
+                            value={qtd} keyboardType="numeric"/>
                     </View>
 
                 </View>
