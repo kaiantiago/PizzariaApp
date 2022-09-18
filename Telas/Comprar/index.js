@@ -149,6 +149,7 @@ export default function Comprar({ navigation }) {
         const prodCompra = prodsCompra.find(produto => produto.id == identificador);
         prodCompra.qtd -= 1;
         prodCompra.qtd += 2;
+        setTotal(total + prodCompra.precoUn)
         carregaDados();
     }
 
@@ -157,6 +158,7 @@ export default function Comprar({ navigation }) {
         prodCompra.qtd -= 1;
         if (prodCompra.qtd <= 0)
             removeItemOnce(prodsCompra, prodCompra);
+        setTotal(total - prodCompra.precoUn)
         carregaDados();
     }
 
@@ -255,7 +257,7 @@ export default function Comprar({ navigation }) {
                         onOpen={onP}
                         setOpen={setOpenP}
                         setValue={setValueP}
-                        setItems={setProdutos} style={styles.campoDrop}
+                        setItems={setProdutos}
                         style={styles.campoDrop} dropDownContainerStyle={{
                             width: '68%', alignSelf: 'center'
                         }}>

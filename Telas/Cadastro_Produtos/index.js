@@ -180,7 +180,7 @@ export default function Cadastro_Produtos({ navigation }) {
                     items={categorias}
                     setOpen={setOpen}
                     setValue={setValue}
-                    setItems={setCategorias} style={styles.campoDrop}
+                    setItems={setCategorias}
                     style={styles.campoDrop} dropDownContainerStyle={{
                         width: '68%', alignSelf: 'center'
                     }}>
