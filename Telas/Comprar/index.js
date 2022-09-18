@@ -225,7 +225,7 @@ export default function Comprar({navigation}) {
             
             <View>
                 <Text style={styles.lblDropdown}>Selecione o produto</Text>
-                <DropDownPicker open={openP}
+                <DropDownPicker zIndex={1000} open={openP}
                     value={valueP}
                     items={produtos}
                     setOpen={setOpenP}
