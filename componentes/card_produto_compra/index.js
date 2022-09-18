@@ -16,11 +16,11 @@ export default function CardProdutoCompra({produto, adicionar1, remover1}) {
            <Text style={styles.listaTelefone} >{produto.qtd} </Text>
            <View style={styles.dadosBotoesAcao}>
                <TouchableOpacity onPress={() => adicionar1(produto.id)}>
-                   <Ionicons name="plus" size={32} color="red" />
+                   <Entypo name="plus" size={32} color="red" />
                </TouchableOpacity>
 
                <TouchableOpacity onPress={() => remover1(produto.id)}>
-                   <Ionicons name="minus" size={32} color="black" />
+                   <Entypo name="minus" size={32} color="black" />
                </TouchableOpacity>
 
            </View>

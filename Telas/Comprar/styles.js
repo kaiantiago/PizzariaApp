@@ -38,8 +38,11 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontWeight: 'bold',
     },
-    lblDropdown: {
+    lblDropdown2: {
         marginTop: 90  
+    },
+    lblDropdown: {
+        marginTop: 10  
     },
     campoDrop: {
         alignSelf: 'center',

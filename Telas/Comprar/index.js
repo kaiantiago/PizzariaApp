@@ -136,7 +136,7 @@ export default function Comprar({navigation}) {
         prodsCompra = arr;
     }
 
-    function confirmaCompra(identificador) {
+    function confirmaCompra() {
         Alert.alert('Atenção', 'Confirma realização da compra?',
           [
             {
@@ -171,7 +171,7 @@ export default function Comprar({navigation}) {
     }
 
     function addCarrinho(){
-        const prodCompra = todosProdutos.find(produto => produto.id == identificador);
+        const prodCompra = todosProdutos.find(produto => produto.id == valueP);
         let prod = {
             id: valueP,
             idCat: valueC,
@@ -195,7 +195,7 @@ export default function Comprar({navigation}) {
             </View>
 
             <View>
-                <Text style={styles.lblDropdown}>Selecione a categoria</Text>
+                <Text style={styles.lblDropdown2}>Selecione a categoria</Text>
                 <DropDownPicker open={openC}
                     value={valueC}
                     items={categorias}
