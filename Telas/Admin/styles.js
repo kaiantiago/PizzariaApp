@@ -5,10 +5,11 @@ const styles = StyleSheet.create({
         marginTop: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        flex: 1
     },
     titulo: {
-        fontSize: 25,
+        fontSize: 23,
         fontWeight: 'bold',
         justifyContent: 'center',
         alignItems: 'center',
