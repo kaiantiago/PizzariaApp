@@ -51,6 +51,7 @@ export default function Cadastro_Produtos({ navigation }) {
           Produto.listaProdutos().then((resposta) => {
 
             let produts = resposta;
+            console.log(produts);
             setProdutos(produts);
         })
         Categoria.listaCategorias().then((resposta) => {
@@ -121,7 +122,9 @@ export default function Cadastro_Produtos({ navigation }) {
           setId(produto.id);
           setDescricao(produto.descricao);
           setPrecoUn(produto.precoUn);
+          console.log(precoUn);
           setIdCat(produto.idCat);
+          //console.log(idCat);
           setValue(produto.idCat);
         }
     
