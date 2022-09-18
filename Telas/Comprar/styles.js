@@ -5,10 +5,11 @@ const styles = StyleSheet.create({
         marginTop: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        flex: 1
     },
     titulo: {
-        fontSize: 25,
+        fontSize: 23,
         fontWeight: 'bold',
         justifyContent: 'center',
         alignItems: 'center',
@@ -19,7 +20,8 @@ const styles = StyleSheet.create({
     areaBtnVoltar: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around'
+        alignSelf: 'center',
+        justifyContent: 'space-around',
     },
     btnVoltar: {
         width: '12%',
@@ -32,9 +34,9 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     textBtnVoltar: {
-        fontSize: 15,
+        fontSize: 14,
         color: '#ffffff',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     lblDropdown: {
         marginTop: 90  
