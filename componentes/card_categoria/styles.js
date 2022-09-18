@@ -8,6 +8,8 @@ const styles = StyleSheet.create({
         height: 80,
         alignItems: 'center',
         margin: 10,
+        borderColor: '#000',
+        borderWidth: 0.85,
         borderRadius: 30,
         shadowColor: "#000",
         shadowOffset: {
@@ -19,9 +21,10 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     listaNome: {
-        width: '90%',
-        fontSize: 26,
-        paddingLeft: 10
+        width: '85%',
+        fontSize: 18,
+        paddingRight: 10,
+        marginLeft: 10
     },
     txtPreco:{
         width: "20%",

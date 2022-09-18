@@ -26,6 +26,14 @@ export default function Cadastro_Produtos({ navigation }) {
 
     let tabelasCriadas = false;
 
+    DropDownPicker.addTranslation("PT", {
+        PLACEHOLDER: "Selecione um item",
+        SEARCH_PLACEHOLDER: "Clique em qualquer item",
+        NOTHING_TO_SHOW: "Hmm, parece que não há itens"
+    });
+
+    DropDownPicker.setLanguage("PT");
+
     async function processamentoUseEffect() {
         if (!tabelasCriadas) {
             console.log("Verificando necessidade de criar tabelas...");
@@ -172,7 +180,10 @@ export default function Cadastro_Produtos({ navigation }) {
                     items={categorias}
                     setOpen={setOpen}
                     setValue={setValue}
-                    setItems={setCategorias} style={styles.campoDrop}>
+                    setItems={setCategorias} style={styles.campoDrop}
+                    style={styles.campoDrop} dropDownContainerStyle={{
+                        width: '68%', alignSelf: 'center'
+                    }}>
                 </DropDownPicker>
             </View>
 

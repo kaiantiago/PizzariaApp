@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
     areaDescricao: {
         width: '55%',
         marginLeft: 20,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginTop: 40
     },
     txtCep: {
         marginTop: 12,
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     areaPreco: {
         width: '20%',
         marginLeft: 20,
-        marginTop: 30
+        marginTop: 40
     },
     listaProdutos: {
         width: '100%',
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
         borderColor: "#000",
         borderWidth: 1,
         height: 50,
-        width: '12%',
+        width: '15%',
         paddingHorizontal: 10,
         borderRadius: 10,
     },

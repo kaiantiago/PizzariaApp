@@ -1,4 +1,4 @@
-import { react, useState, useEffect } from 'react';
+import { react, useState, useEffect, useCallback } from 'react';
 import styles from './styles';
 import { Produto } from '../../services/db_produtos';
 import { Categoria } from '../../services/db_categorias';
@@ -37,6 +37,22 @@ export default function Comprar({ navigation }) {
     const [prodsCompra, setProdsCompra] = useState([]);
 
     let tabelasCriadas = false;
+
+    DropDownPicker.addTranslation("PT", {
+        PLACEHOLDER: "Selecione um item",
+        SEARCH_PLACEHOLDER: "Clique em qualquer item",
+        NOTHING_TO_SHOW: "Hmm, parece que não há itens"
+    });
+
+    DropDownPicker.setLanguage("PT");
+
+    var onP = useCallback(() => {
+        setOpenC(false);
+    }, []);
+
+    var onC = useCallback(() => {
+        setOpenP(false);
+    }, []);
 
     async function processamentoUseEffect() {
         if (!tabelasCriadas) {
@@ -219,10 +235,14 @@ export default function Comprar({ navigation }) {
                     <DropDownPicker open={openC}
                         value={valueC}
                         items={categorias}
+                        onOpen={onC}
                         setOpen={setOpenC}
                         setValue={setValueC}
                         setItems={setCategorias}
-                        onChangeValue={(value) => atualizaComboProds(value)} style={styles.campoDrop}>
+                        onChangeValue={(value) => atualizaComboProds(value)}
+                        style={styles.campoDrop} dropDownContainerStyle={{
+                            width: '68%', alignSelf: 'center'
+                        }}>
                     </DropDownPicker>
                 </View>
 
@@ -231,9 +251,13 @@ export default function Comprar({ navigation }) {
                     <DropDownPicker zIndex={1000} open={openP}
                         value={valueP}
                         items={produtos}
+                        onOpen={onP}
                         setOpen={setOpenP}
                         setValue={setValueP}
-                        setItems={setProdutos} style={styles.campoDrop}>
+                        setItems={setProdutos} style={styles.campoDrop}
+                        style={styles.campoDrop} dropDownContainerStyle={{
+                            width: '68%', alignSelf: 'center'
+                        }}>
                     </DropDownPicker>
                 </View>
 
@@ -242,7 +266,7 @@ export default function Comprar({ navigation }) {
                         <Text style={styles.txtQtd}>Quantidade</Text>
                         <TextInput style={styles.caixaTexto}
                             onChangeText={(texto) => setQtd(texto)}
-                            value={qtd} keyboardType="numeric"/>
+                            value={qtd} keyboardType="numeric" />
                     </View>
 
                 </View>
@@ -251,12 +275,14 @@ export default function Comprar({ navigation }) {
                     <Text style={styles.textoBotao}>Adicionar ao carrinho</Text>
                 </TouchableOpacity>
 
+                <Text></Text>
+                
                 {
-                        prodsCompra.map((produto, index) => (
-                            <CardProdutoCompra produto={produto} key={index.toString()}
-                                adicionar1={add1Prod} remover1={sub1Prod} />
-                        ))
-                    }
+                    prodsCompra.map((produto, index) => (
+                        <CardProdutoCompra produto={produto} key={index.toString()}
+                            adicionar1={add1Prod} remover1={sub1Prod} />
+                    ))
+                }
 
                 <View style={styles.areaPreco}>
                     <Text>Preço total: {total}</Text>
