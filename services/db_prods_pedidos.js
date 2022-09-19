@@ -8,7 +8,7 @@ export function geraObjSelectPedido(registros){
         let obj = {
             id: registros.rows.item(n).id,
             descricao: registros.rows.item(n).descricao,
-            preco: registros.rows.item(n).preco,
+            precoUn: registros.rows.item(n).precoUn,
             idCat: registros.rows.item(n).idCat,
             idProd: registros.rows.item(n).idProd,
             idPed: registros.rows.item(n).idPed,

@@ -24,6 +24,7 @@ export default function Comprar({ navigation }) {
     const [qtd, setQtd] = useState();
     const [idCat, setIdCat] = useState();
     const [todosProdutos, setTodosProdutos] = useState([]);
+    const [precoUn, setPrecoUn] = useState(0);
 
     const [openP, setOpenP] = useState(false);
     const [valueP, setValueP] = useState(null);
@@ -161,6 +162,7 @@ export default function Comprar({ navigation }) {
         setTotal(total - prodCompra.precoUn)
         carregaDados();
     }
+
 
     function removeItemOnce(arr, value) {
         var index = arr.indexOf(value);

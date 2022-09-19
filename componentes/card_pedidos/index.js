@@ -23,7 +23,7 @@ export default function CardPedidos({ pedido }) {
         try {
             ProdPedido.listaProdutosDoPedido(pedido.id).then((resP) => {
                 //produtos.push(resP);
-                console.log("lista produto ")
+                console.log(resP)
                 //console.log(resP);
                 //console.log('cheguei')
                 setProdutos(resP)
@@ -52,7 +52,9 @@ export default function CardPedidos({ pedido }) {
                 <CollapseBody >
                     {produtos.map((prod, index) => (
                         <View key={index.toString()} style={styles.bodyCollapse}>
-                            <Text style={{ marginLeft: 7 }}>{prod.descricao}</Text>
+                            <Text style={{ marginLeft: 15 }}>{prod.descricao}</Text>
+                            <Text style={{ marginLeft: 15 }}>R${prod.precoUn} cada</Text>
+                            <Text style={{ marginLeft: 15 }}>{prod.qtd} unidades</Text>
                         </View>
                     ))}
                 </CollapseBody>
