@@ -34,6 +34,10 @@ export default function CardPedidos({ pedido }) {
         }
     }
 
+    function getTextoData(numero){
+        return numero;
+    }
+
     return (
         <View style={{ width: '100%' }}>
             <Collapse style={{ width: '100%' }}>
@@ -41,6 +45,7 @@ export default function CardPedidos({ pedido }) {
                     <View style={styles.contato}>
                         <Text style={styles.txtBloco}>{pedido.cep}</Text>
                         <Text style={{ marginLeft: 30 }}>Valor total: R${pedido.total}</Text>
+                        <Text style={{ marginLeft: 30 }}>{getTextoData(pedido.data)}</Text>
                     </View>
                 </CollapseHeader>
                 <CollapseBody >

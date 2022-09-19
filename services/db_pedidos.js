@@ -10,10 +10,12 @@ export function geraObjSelect(registros){
         let obj = {
             id: registros.rows.item(n).id,
             total: registros.rows.item(n).total,
-            cep: registros.rows.item(n).cep
+            cep: registros.rows.item(n).cep,
+            data: registros.rows.item(n).data
         }
         retorno.push(obj);
     }
+    
     return retorno;
 }
 
@@ -25,7 +27,8 @@ export class Pedido {
         (
             id text not null primary key,
             total int not null,
-            cep text not null
+            cep text not null,
+            data int not null
         )`;
 
         let dbCx = getDbConnection();
@@ -53,7 +56,7 @@ export class Pedido {
     static adicionaPedido(pedido, produtos){
         var promises = [];
         var novoId = createUniqueId()
-        promises.push(adiciona('insert into tbPedidos (id, total, cep) values (?,?,?)', [novoId, pedido.total, pedido.cep] ));
+        promises.push(adiciona('insert into tbPedidos (id, total, cep, data) values (?,?,?,?)', [novoId, pedido.total, pedido.cep, Date.now()] ));
         
         produtos.forEach(element => {
             element.idPed = novoId;
