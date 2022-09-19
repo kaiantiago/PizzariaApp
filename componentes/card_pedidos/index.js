@@ -35,7 +35,8 @@ export default function CardPedidos({ pedido }) {
     }
 
     function getTextoData(numero){
-        return numero;
+        var data = new Date(numero);
+        return "Compra em " + data.toLocaleDateString();
     }
 
     return (
@@ -45,7 +46,7 @@ export default function CardPedidos({ pedido }) {
                     <View style={styles.contato}>
                         <Text style={styles.txtBloco}>{pedido.cep}</Text>
                         <Text style={{ marginLeft: 30 }}>Valor total: R${pedido.total}</Text>
-                        <Text style={{ marginLeft: 30 }}>{getTextoData(pedido.data)}</Text>
+                        <Text style={{ marginLeft: 25 }}>{getTextoData(pedido.data)}</Text>
                     </View>
                 </CollapseHeader>
                 <CollapseBody >
