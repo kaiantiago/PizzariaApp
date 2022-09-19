@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#ffffff',
         fontWeight: 'bold'
+    },
+    listaProdutos: {
+        flex: 1,
+        width: "100%",
     }
 })
 

@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
         margin: 10,
         borderColor: '#000',
         borderWidth: 0.85,
-        borderRadius: 30,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -19,6 +18,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.22,
         shadowRadius: 2.22,
         elevation: 3,
+        width: 350,
+        alignSelf: 'center'
     },
     listaNome: {
         width: '70%',
@@ -44,6 +45,28 @@ const styles = StyleSheet.create({
     listaTelefone: {
         color: "#FFFFFF",
         fontSize: 18,
+    },
+    txtBloco: {
+        marginLeft: 10
+    },
+    bodyCollapse: {
+        backgroundColor: '#FFFFFF',
+        flexDirection: 'row',
+        height: 30,
+        alignItems: 'center',
+        margin: 10,
+        borderColor: '#000',
+        borderWidth: 0.85,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 3,
+        width: 300,
+        marginLeft: 80,
     },
 });
 

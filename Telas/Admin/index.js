@@ -76,6 +76,7 @@ export default function Admin({ navigation }) {
             </View>
 
             <ScrollView style={styles.listaProdutos}>
+            <Text style={{marginTop: 25}}></Text>
             {
                 pedidos.map((pedido, index) => (
                     <CardPedidos pedido={pedido} key={index.toString()}

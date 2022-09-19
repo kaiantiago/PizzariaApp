@@ -215,7 +215,7 @@ export default function Comprar({ navigation }) {
             idPed: "",
             qtd: qtd
         }
-        setTotal(total + prod.precoUn*prod.qtd)
+        setTotal(total + prod.precoUn * prod.qtd)
         console.log(prod);
         prodsCompra.push(prod);
         limparCampos();
@@ -223,16 +223,16 @@ export default function Comprar({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <ScrollView style={styles.scroll}>
-                <View style={styles.areaBtnVoltar}>
-                    <TouchableOpacity style={styles.btnVoltar} onPress={
-                        () => navigation.navigate('Home')
-                    }>
-                        <Text style={styles.textBtnVoltar}> Voltar </Text>
-                    </TouchableOpacity>
-                    <Text style={styles.titulo}>Faça um pedido</Text>
-                </View>
 
+            <View style={styles.areaBtnVoltar}>
+                <TouchableOpacity style={styles.btnVoltar} onPress={
+                    () => navigation.navigate('Home')
+                }>
+                    <Text style={styles.textBtnVoltar}> Voltar </Text>
+                </TouchableOpacity>
+                <Text style={styles.titulo}>Faça um pedido</Text>
+            </View>
+            <ScrollView style={styles.scroll}>
                 <View>
                     <Text style={styles.lblDropdown2}>Selecione a categoria</Text>
                     <DropDownPicker open={openC}
@@ -288,7 +288,7 @@ export default function Comprar({ navigation }) {
                 }
 
                 <View style={styles.areaPreco}>
-                    <Text style={{fontSize: 28}}>Preço total:          R${total}</Text>
+                    <Text style={{ fontSize: 28 }}>Preço total:          R${total}</Text>
                 </View>
 
                 <View style={styles.areaDescricao}>
