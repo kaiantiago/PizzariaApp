@@ -3,7 +3,7 @@ import {getDbConnection, exclui, lista, createUniqueId, adiciona} from './dbserv
 
 export function geraObjSelectPedido(registros){
     var retorno = [];
-
+    //console.log(registros);
     for (let n = 0; n < registros.rows.length; n++) {
         let obj = {
             id: registros.rows.item(n).id,

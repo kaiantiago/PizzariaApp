@@ -9,7 +9,7 @@ export function getDbConnection() {
 
 export function lista(queryQ, geraObjSelect) {
     return new Promise((resolve, reject) => {
-
+        //console.log(queryQ);
         let dbCx = getDbConnection();
         dbCx.transaction(tx => {
             let query = queryQ;

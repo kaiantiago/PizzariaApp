@@ -42,11 +42,20 @@ export default function Admin({ navigation }) {
         try {
             Pedido.listaPedidos().then((resposta) => {
             let ped = resposta;
-            ProdPedido.listaProdutosDoPedido(ped.idPed).then((resposta) => {
-                produtos.push(resposta);
-                console.log(resposta)
-                console.log('cheguei')
-            })
+            console.log("----------");
+            console.log("lista pedidos");
+            //console.log(resposta);
+            console.log("----------");
+            ped.forEach(element => {
+                //colocar no card
+                ProdPedido.listaProdutosDoPedido(element.id).then((resP) => {
+                    produtos.push(resP);
+                    console.log("lista produto ")
+                    //console.log(resP);
+                    //console.log('cheguei')
+                })
+            });
+            
             setPedidos(ped);
         })
         } catch (e) {
@@ -70,7 +79,7 @@ export default function Admin({ navigation }) {
             {
                 pedidos.map((pedido, index) => (
                     <CardPedidos pedido={pedido} key={index.toString()}
-                        listaProdutos={produtos[index]}/>
+                        />
                 ))
             }
             </ScrollView>
