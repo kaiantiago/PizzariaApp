@@ -21,9 +21,10 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     listaNome: {
-        width: '85%',
+        width: '75%',
         fontSize: 18,
         paddingRight: 10,
+        paddingLeft: 10,
     },
 
     dadosListaTelefone: {
@@ -31,7 +32,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     dadosBotoesAcao: {
-        width: '20%'
+        width: '15%',
+        marginLeft:10
     },
     iconTelefone: {
         width: 20,

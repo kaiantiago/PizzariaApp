@@ -15,10 +15,10 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 export default function Cadastro_Produtos({ navigation }) {
 
-    const [id, setId] = useState();
-    const [descricao, setDescricao] = useState();
-    const [precoUn, setPrecoUn] = useState();
-    const [idCat, setIdCat] = useState();
+    const [id, setId] = useState(undefined);
+    const [descricao, setDescricao] = useState("");
+    const [precoUn, setPrecoUn] = useState("");
+    const [idCat, setIdCat] = useState("");
     const [produtos, setProdutos] = useState([]);
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
@@ -85,6 +85,12 @@ export default function Cadastro_Produtos({ navigation }) {
             idCat: value
         };
 
+        
+        if(descricao==""||precoUn==""){
+            Alert.alert("Preecha os campos");
+            return;
+        }
+
         try {
 
             if (novoRegistro) {
@@ -127,7 +133,7 @@ export default function Cadastro_Produtos({ navigation }) {
         if (produto != undefined) {
             setId(produto.id);
             setDescricao(produto.descricao);
-            setPrecoUn(produto.precoUn);
+            setPrecoUn(produto.precoUn.toString());
             setIdCat(produto.idCat);
             setValue(produto.idCat);
         }
@@ -201,7 +207,7 @@ export default function Cadastro_Produtos({ navigation }) {
                     <TextInput style={styles.caixaTexto}
                         onChangeText={(texto) => setPrecoUn(texto)}
                         value={precoUn}
-                        keyboardType='num-pad' />
+                        keyboardType="numeric" />
                 </View>
             </View>
 

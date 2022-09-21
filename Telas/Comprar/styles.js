@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         borderColor: "#000",
         borderWidth: 1,
         height: 50,
-        width: '15%',
+        width: '20%',
         paddingHorizontal: 10,
         borderRadius: 10,
     },
@@ -145,7 +145,12 @@ const styles = StyleSheet.create({
     txtQtd: {
         marginTop: 12,
         marginRight: 10,
-        marginLeft: 180
+        marginLeft: 45
+    },
+    txtPreco: {
+        marginTop: 12,
+        marginLeft: 30,
+        fontSize:14
     },
     caixaCep: {
         borderColor: "#000",

@@ -21,7 +21,7 @@ export default function Comprar({ navigation }) {
     const [id, setId] = useState();
     const [cep, setCep] = useState();
     const [total, setTotal] = useState(0);
-    const [qtd, setQtd] = useState();
+    const [qtd, setQtd] = useState("");
     const [idCat, setIdCat] = useState();
     const [todosProdutos, setTodosProdutos] = useState([]);
     const [precoUn, setPrecoUn] = useState(0);
@@ -129,6 +129,7 @@ export default function Comprar({ navigation }) {
         setOpenP(false);
         setProdutos([]);
         setTodosProdutos([]);
+        setPrecoUn(0);
         Keyboard.dismiss();
     }
 
@@ -143,6 +144,7 @@ export default function Comprar({ navigation }) {
         setProdsCompra([]);
         setTodosProdutos([]);
         setCep("");
+        setPrecoUn(0);
         Keyboard.dismiss();
     }
 
@@ -191,12 +193,15 @@ export default function Comprar({ navigation }) {
             Produto.listaProdutosFiltro(idCateg).then((resposta) => {
 
                 let produts = [];
+                //setTodosProdutos([]);
+                todosProdutos.length = 0;
                 resposta.forEach(element => {
                     todosProdutos.push(element);
                     produts.push({ label: element.descricao, value: element.id });
                 });
                 console.log(produts);
                 setProdutos(produts);
+                //setPrecoUn(0);
             })
         } catch (e) {
             console.log(e.toString());
@@ -208,6 +213,10 @@ export default function Comprar({ navigation }) {
 
     function addCarrinho() {
         const prodCompra = todosProdutos.find(produto => produto.id == valueP);
+        if(prodCompra==null||qtd==""){
+            Alert.alert("Preecha os campos");
+            return;
+        }
         let prod = {
             id: valueP,
             idCat: valueC,
@@ -221,6 +230,13 @@ export default function Comprar({ navigation }) {
         console.log(prod);
         prodsCompra.push(prod);
         limparCampos();
+    }
+
+    function atualizaPreco(idProd){
+        const prodCompra = todosProdutos.find(produto => produto.id == idProd);
+        if(prodCompra!=null)
+            setPrecoUn(prodCompra.precoUn);
+        //console.log(idProd);
     }
 
     return (
@@ -260,6 +276,7 @@ export default function Comprar({ navigation }) {
                         setOpen={setOpenP}
                         setValue={setValueP}
                         setItems={setProdutos}
+                        onChangeValue={(value) => atualizaPreco(value)}
                         style={styles.campoDrop} dropDownContainerStyle={{
                             width: '68%', alignSelf: 'center'
                         }}>
@@ -268,7 +285,10 @@ export default function Comprar({ navigation }) {
 
                 <View style={styles.areaDados}>
                     <View style={styles.areaQtd}>
-                        <Text style={styles.txtQtd}>Quantidade</Text>
+                        {precoUn==0?<Text style={styles.txtPreco}>          </Text>:
+                        <Text style={styles.txtPreco}>R${precoUn} cada</Text>
+                        }
+                        <Text style={styles.txtQtd}>Quantidade:</Text>
                         <TextInput style={styles.caixaTexto}
                             onChangeText={(texto) => setQtd(texto)}
                             value={qtd} keyboardType="numeric" />
@@ -288,21 +308,25 @@ export default function Comprar({ navigation }) {
                             adicionar1={add1Prod} remover1={sub1Prod} />
                     ))
                 }
+                {prodsCompra.length<1?<View></View>:
+                <View>
+                    <View style={styles.areaPreco}>
+                        <Text style={{ fontSize: 28 }}>Preço total:          R${total}</Text>
+                    </View>
 
-                <View style={styles.areaPreco}>
-                    <Text style={{ fontSize: 28 }}>Preço total:          R${total}</Text>
+                    <View style={styles.areaDescricao}>
+                        <Text style={styles.txtCep}>Cep para entrega</Text>
+                        <TextInput style={styles.caixaCep}
+                            onChangeText={(texto) => setCep(texto)}
+                            value={cep} />
+                    </View>
+
+                    <TouchableOpacity style={styles.botao} onPress={() => confirmaCompra()}>
+                        <Text style={styles.textoBotao}>Finalizar compra</Text>
+                    </TouchableOpacity>
                 </View>
-
-                <View style={styles.areaDescricao}>
-                    <Text style={styles.txtCep}>Cep para entrega</Text>
-                    <TextInput style={styles.caixaCep}
-                        onChangeText={(texto) => setCep(texto)}
-                        value={cep} />
-                </View>
-
-                <TouchableOpacity style={styles.botao} onPress={() => confirmaCompra()}>
-                    <Text style={styles.textoBotao}>Finalizar compra</Text>
-                </TouchableOpacity>
+                }
+                
                 <Text></Text>
             </ScrollView>
 
